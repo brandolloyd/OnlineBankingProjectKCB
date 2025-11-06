@@ -1,0 +1,13 @@
+# Online Banking System
+
+A browser-server Java + Oracle project for managing customer accounts, balances, and transactions
+
+# Technologies
+- Java (JDBC)
+- Oracle Database
+- JavaScript
+
+# Setup Process
+1. Install Oracle Database, via school accessed database or personal
+2. Download the oracle JDBC driver
+3. Open this project in your IDE
