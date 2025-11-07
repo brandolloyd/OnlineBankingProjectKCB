@@ -1,0 +1,59 @@
+SQL Table Creation (Directly from team document)
+-- 1. Create the Bank table
+CREATE TABLE Bank (
+	BankID NUMBER PRIMARY KEY,
+	Name VARCHAR2(100) NOT NULL,
+	Location VARCHAR2(100)
+);
+
+-- 2. Create the Customer table
+CREATE TABLE Customer (
+	CustomerID NUMBER PRIMARY KEY,
+	FirstName VARCHAR2(50) NOT NULL,
+	LastName VARCHAR2(50) NOT NULL,
+	Birthday DATE NOT NULL,
+	Username VARCHAR2(50) UNIQUE NOT NULL,
+	Password VARCHAR2(100) NOT NULL,
+	DateCreated DATE DEFAULT SYSDATE
+);
+
+-- 3. Create the Employee table
+CREATE TABLE Employee (
+	EmployeeID NUMBER PRIMARY KEY,
+	FirstName VARCHAR2(50) NOT NULL,
+	LastName VARCHAR2(50) NOT NULL,
+	Position VARCHAR2(20) CHECK (Position IN ('Manager', 'Teller', 'Clerk')),
+	StartDate DATE DEFAULT SYSDATE,
+	Birthday DATE
+);
+
+-- 4. Create the Accounts table
+CREATE TABLE Accounts (
+	AccountID NUMBER PRIMARY KEY,
+	UserID NUMBER NOT NULL,
+	AccountType VARCHAR2(20) CHECK (AccountType IN ('CHECKING','SAVINGS')),
+	Balance NUMBER(10,2) DEFAULT 0 CHECK (Balance >= 0),
+	DateOpened DATE DEFAULT SYSDATE,
+	FOREIGN KEY (UserID) REFERENCES Customer(CustomerID)
+);
+
+-- 5. Create the Transactions table
+CREATE TABLE Transactions (
+	TransactionID NUMBER PRIMARY KEY,
+	AccountID NUMBER NOT NULL,
+    TransactionType VARCHAR2(20) CHECK (TransactionType IN ('DEPOSIT','WITHDRAW','TRANSFER')),
+    Amount NUMBER(10,2) CHECK (Amount > 0),
+    TransactionDate DATE DEFAULT SYSDATE,
+	FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
+);
+
+-- 6. Create the Cards table
+CREATE TABLE Cards (
+	CARDID NUMBER PRIMARY KEY,
+	CustomerID NUMBER NOT NULL,
+	CardType VARCHAR2(20) CHECK (CardType IN ('DEBIT','CREDIT')),
+	FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+);
+
+-- Commit the structural changes
+COMMIT;
