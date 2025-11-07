@@ -1,0 +1,30 @@
+services:
+  # 1. Java Application Service
+  app:
+    build: .
+    container_name: online-banking-app
+    ports:
+      - "8080:8080"
+    environment:
+      # These credentials connect the Spring app to the database container
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracle-db:1521/XEPDB1
+      - SPRING_DATASOURCE_USERNAME=system
+      - SPRING_DATASOURCE_PASSWORD=wompwompwomp
+    depends_on:
+      - oracle-db
+
+  # 2. Oracle Database Service
+  oracle-db:
+    image: container-registry.oracle.com/database/express:latest
+    platform: linux/amd64
+    container_name: oracle-db
+    ports:
+      - "1521:1521"
+    environment:
+      - ORACLE_PWD=wompwompwomp # same as above
+    volumes:
+      # Saves the database data across container restarts
+      - oracle_data:/opt/oracle/oradata
+
+volumes:
+  oracle_data:
