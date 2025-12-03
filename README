@@ -1,5 +1,38 @@
 # Online Banking System
 
-A browser-server Java + Oracle project for managing customer accounts, balances, and transactions
+A browser-server Java + Oracle project for managing customer accounts, balances, and transactions.
 
+Work in progress yall, but heres an explanation of everything, I spent a bit trying to figure out how we were going to get everything running properly.
+Here are the main components.
+-----------------------------
+1. Docker
+Docker is our main source for running and compiling the entirety of the code, including the database and finished client.
+It connects everything pretty well from what I tested, and hopefully, because of how it works, should function relatively 
+easily when using this repo in your own programming application. Just make sure that you have the Docker extension installed.
 
+Along with the extension in your IDE, download the application, which you dont need an account for (I think), it shows you your connection to
+the database and allows you to disconnect easily when youre done
+https://www.docker.com/
+
+2. Java Development Kit 17
+We all most likely have this installed, but just make sure yk, overall language for the backend
+
+3. Oracle SQL Developer
+Used to connect to the database, and create all the necessary tables, views, restraints, etc.
+https://www.oracle.com/database/sqldeveloper/
+-----------------------------
+
+In order to start the database up, make sure you are clicked on the main file directory, the top most one, open a terminal, and type 
+"docker compose up -d oracle-db"
+
+This instructs docker to execute the compose file, specifically the oracle-db service.
+
+By doing this, you can go into Oracle SQL Developer, click the green plus sign in the top left, and put in the information which is also found in 
+the docker compose file
+Username: SYSTEM
+Password: wompwompwomp
+hostname: localhost
+port: 1521
+Service Name: XE
+
+Test the connection, and if it works YEIGHHHHHHH YEIGHHHHHHHHHHH
