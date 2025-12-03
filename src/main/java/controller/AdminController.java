@@ -17,4 +17,18 @@ public class AdminController {
     public AdminController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+    //List all user
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+    //Search user by account number (Admin panel: search by account number)
+    @GetMapping("/users/by-account/{accountNumber}")
+    public ResponseEntity<User> getUserByAccountNumber(@PathVariable String accountNumber) {
+        Optional<User> userOpt = userRepository.findByAccountNumber(accountNumber);
+
+        return userOpt.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    // Search users by last name (Admin panel: search by last name)
+    @GetMapping("/users/by-lastname")
 }
