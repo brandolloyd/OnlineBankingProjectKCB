@@ -93,3 +93,6 @@ $RECYCLE.BIN/
 
 # Oracle JDBC driver
 ojdbc*.jar
+
+#.idea folder
+.idea/
