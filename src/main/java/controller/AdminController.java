@@ -1,9 +1,13 @@
 package controller;
+
 import entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import repository.UserRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,22 +17,45 @@ import java.util.Optional;
 public class AdminController {
     private final UserRepository userRepository;
 
-    //Constructor injection
+    @Autowired
     public AdminController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    //List all user
+    //List all users in the system (admin overview)
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        List<User> users = new ArrayList<>();
+        userRepository.findAll().forEach(users::add); //CrudRepository returns iterable
+        return users;
     }
-    //Search user by account number (Admin panel: search by account number)
-    @GetMapping("/users/by-account/{accountNumber}")
-    public ResponseEntity<User> getUserByAccountNumber(@PathVariable String accountNumber) {
-        Optional<User> userOpt = userRepository.findByAccountNumber(accountNumber);
 
-        return userOpt.map(ResponseEntity::ok)
+    //Find user by username.
+    @GetMapping("/users/by-username")
+    public ResponseEntity<User> getUserByUsername(@RequestParam String username) {
+        Optional<User> userOpt = userRepository.findByUsername(username);
+
+        return userOpt
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-    // Search users by last name (Admin panel: search by last name)
-    @GetMapping("/users/by-lastname")
+    //Create a new user (admin-created account)
+    // JSON body should contain: firstName, LastName, username, password, birthday, dateCreated.
+
+    @PostMapping("/users")
+    public ResponseEntity<User> createUser(@RequestBody User newUser) {
+        User saved = userRepository.save(newUser);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
+    }
+
+    // Delete a user by id.
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        if (!userRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        userRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
 }
