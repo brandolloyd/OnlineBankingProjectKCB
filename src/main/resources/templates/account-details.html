@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Account Details</title>
+</head>
+<body>
+
+<h1>Account Details</h1>
+
+<p><strong>Account ID:</strong> <span th:text="${account.accountId}"></span></p>
+<p><strong>Type:</strong> <span th:text="${account.accountType}"></span></p>
+<p><strong>Balance:</strong> $<span th:text="${account.balance}"></span></p>
+<p><strong>Date Opened:</strong> <span th:text="${account.dateOpened}"></span></p>
+
+<br>
+
+<a href="/user/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

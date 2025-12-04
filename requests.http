@@ -1,0 +1,4 @@
+
+### Test User Dashboard
+GET http://localhost:8080/api/users/testuser/dashboard
+Accept: application/json

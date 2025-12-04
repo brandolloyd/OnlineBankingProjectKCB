@@ -1,4 +1,4 @@
-package entity;
+package com.KCBProject.BankingApplication.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -9,6 +9,7 @@ import java.util.Date;
 public class Account {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ACCOUNTID")
     private Long accountId;
 

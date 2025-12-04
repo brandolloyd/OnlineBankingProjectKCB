@@ -1,4 +1,4 @@
-package entity;
+package com.KCBProject.BankingApplication.entity;
 
 import jakarta.persistence.*;
 import java.util.Date;
@@ -8,6 +8,7 @@ import java.util.Date;
 public class Employee {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EMPLOYEEID")
     private Long employeeId;
 

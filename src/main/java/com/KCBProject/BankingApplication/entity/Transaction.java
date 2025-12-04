@@ -1,4 +1,4 @@
-package entity;
+package com.KCBProject.BankingApplication.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
