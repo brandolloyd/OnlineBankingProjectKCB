@@ -1,0 +1,36 @@
+-- creating the stored procedures to take place for views
+
+-- Customer's Account Views
+CREATE PROCEDURE AccountView (p_UserId IN NUMBER)
+AS
+BEGIN
+	SELECT ACCOUNTID, BALANCE, USERID
+	FROM Accounts
+	WHERE USERID = p_UserId;
+END AccountView;
+/
+
+-- Admin Overview - Returns all employee, customer, account, and transaction data
+CREATE PROCEDURE adminOverview (p_EmployeeID IN NUMBER)
+AS
+BEGIN
+	SELECT e.EMPLOYEEID, e.FIRSTNAME, e.LASTNAME, u.CUSTOMERID, u.FIRSTNAME, u.LASTNAME,
+	       a.ACCOUNTID, a.BALANCE, t.TRANSACTIONID, t.TRANSACTIONDATE, t.AMOUNT
+	FROM EMPLOYEE e
+	JOIN Customer u ON e.EMPLOYEEID = u.CUSTOMERID
+	JOIN Accounts a ON u.CUSTOMERID = a.USERID
+	JOIN TRANSACTIONS t ON a.ACCOUNTID = t.ACCOUNTID
+	WHERE e.EMPLOYEEID = p_EmployeeID;
+END adminOverview;
+/
+
+-- Employee/Teller Overview - Returns all customer, account, and transaction data
+CREATE PROCEDURE EmpOverview 
+AS
+BEGIN
+	SELECT u.CUSTOMERID, u.FIRSTNAME, u.LASTNAME, a.ACCOUNTID, a.BALANCE, t.TRANSACTIONDATE, t.AMOUNT
+	FROM Customer u
+	JOIN Accounts a ON u.CUSTOMERID = a.USERID
+	JOIN TRANSACTIONS t ON a.ACCOUNTID = t.ACCOUNTID;
+END EmpOverview;
+/
