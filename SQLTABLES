@@ -57,3 +57,11 @@ CREATE TABLE Cards (
 
 -- Commit the structural changes
 COMMIT;
+
+--7. Create a stored procedure for the customer Account view to call for all customers
+	CREATE PROCEDURE AccountView @Customers' 
+	AS
+	SELECT AccountID, balance, customerID
+	FROM Account
+	WHERE customerID = SYS_CONTEXT(‘USERENV’, ‘SESSION_USER’);
+
