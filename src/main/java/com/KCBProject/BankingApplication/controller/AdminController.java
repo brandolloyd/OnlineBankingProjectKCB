@@ -1,3 +1,5 @@
+//Created by Brandon and Christal
+
 package com.KCBProject.BankingApplication.controller;
 import com.KCBProject.BankingApplication.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,11 @@ public class AdminController {
         return userRepository.findByLastNameContainingIgnoreCase(lastName);
 
     }
+    @PostMapping("/users")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User savedUser = userRepository.save(user);
+        return ResponseEntity.ok(savedUser);
+    }
 
     //Delete users
     @DeleteMapping("/users/{userId}")
@@ -37,4 +44,8 @@ public class AdminController {
             return ResponseEntity.status(404).body(Map.of("message", "User not found."));
         }
     }
+
+
+
+
 }

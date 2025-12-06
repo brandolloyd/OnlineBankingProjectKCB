@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Users</title>
+</head>
+<body>
+<h1>Search Users</h1>
+
+<form th:action="@{/admin/search}" method="post">
+    <label for="lastName">Enter Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+    <button type="submit">Search</button>
+</form>
+
+<hr>
+
+<div th:if="${results}">
+    <h2>Results:</h2>
+    <ul>
+        <li th:each="user : ${results}">
+            <strong th:text="${user.firstName} + ' ' + ${user.lastName}"></strong>
+            — Username: <span th:text="${user.username}"></span>
+        </li>
+    </ul>
+</div>
+
+<a href="/admin/dashboard">Back to Dashboard</a>
+</body>
+</html>

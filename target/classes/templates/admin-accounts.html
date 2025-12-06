@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Accounts</title>
+</head>
+<body>
+<h1>All Accounts</h1>
+
+<table border="1">
+    <tr>
+        <th>Account ID</th>
+        <th>User ID</th>
+        <th>Type</th>
+        <th>Balance</th>
+        <th>Date Opened</th>
+    </tr>
+
+    <tr th:each="acc : ${accounts}">
+        <td th:text="${acc.accountId}"></td>
+        <td th:text="${acc.userId}"></td>
+        <td th:text="${acc.accountType}"></td>
+        <td th:text="${acc.balance}"></td>
+        <td th:text="${acc.dateOpened}"></td>
+    </tr>
+</table>
+
+<br>
+<a href="/admin/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

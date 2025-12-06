@@ -33,6 +33,22 @@ Username: SYSTEM
 Password: wompwompwomp
 hostname: localhost
 port: 1521
-Service Name: XE
+Service Name: XEPDB1
 
 Test the connection, and if it works YEIGHHHHHHH YEIGHHHHHHHHHHH
+
+---------------------------
+
+Assuming a sucessful connection is made to the dateabase, running "BankingApplication.java"
+will boot up the entire website and functions, including a homepage(/) with user login, employee login, and bank info.
+
+1. Employee login, supports managers, tellers, as well as admins.
+    - Admins have full access to all available functions, as shown in code.
+        -Functions include, viewing all employees and users in the database, searching up customers by last name,
+        -creating and deleting accounts and users.
+
+        -Users have access to their finances upon login, and can make deposits and withdraws.
+
+        -Regular employees have the ability to view all customers under their assigned bank.
+
+Created by Christal Cain, Kyra Currence, and Brandon Lloyd.

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            padding-bottom: 5px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        a.btn {
+            display: block;
+            padding: 15px;
+            text-align: center;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        a.btn:hover {
+            background-color: #217dbb;
+        }
+
+        .logout {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .logout a {
+            color: #e74c3c;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logout a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Admin Dashboard</h1>
+    <p>Manage all system data</p>
+</header>
+
+<div class="container">
+
+    <h2>Administrative Actions</h2>
+
+    <div class="btn-grid">
+
+        <!-- Customer Data -->
+        <a class="btn" href="/admin/customers">View All Customers</a>
+
+        <!-- Accounts -->
+        <a class="btn" href="/admin/accounts">View All Accounts</a>
+
+        <!-- Transactions -->
+        <a class="btn" href="/admin/transactions">View All Transactions</a>
+
+        <!-- Search Users -->
+        <a class="btn" href="/admin/search">Search Users (Last Name)</a>
+
+        <!-- Add Account -->
+        <a class="btn" href="/admin/account/add">Add Account</a>
+
+        <!-- Delete Account -->
+        <a class="btn" href="/admin/account/delete">Delete Account</a>
+
+        <!-- Employees -->
+        <a class="btn" href="/admin/employees">View All Employees</a>
+
+        <!-- Banks -->
+        <a class="btn" href="/admin/banks">View All Banks</a>
+
+        <!-- Add User -->
+        <a class="btn" href="/admin/add-user">Add User</a>
+
+    </div>
+
+    <div class="logout">
+        <a href="/employee/login">Logout</a>
+    </div>
+
+</div>
+
+</body>
+</html>

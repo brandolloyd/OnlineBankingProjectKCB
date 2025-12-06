@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bank Details</title>
+</head>
+<body>
+
+<h1 th:text="${bank.name}">Bank Name</h1>
+<p><strong>Address:</strong> <span th:text="${bank.address}"></span></p>
+
+<h2>Employees</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Start Date</th>
+    </tr>
+
+    <tr th:each="employee : ${bank.employees}">
+        <td th:text="${employee.employeeId}"></td>
+        <td th:text="${employee.firstName + ' ' + employee.lastName}"></td>
+        <td th:text="${employee.position}"></td>
+        <td th:text="${employee.startDate}"></td>
+    </tr>
+
+</table>
+
+<br>
+<a href="/banks">← Back to Bank List</a>
+
+</body>
+</html>

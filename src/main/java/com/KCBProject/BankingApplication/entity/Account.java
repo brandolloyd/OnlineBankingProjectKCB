@@ -1,8 +1,13 @@
+//Entity logic/tables created by Brandon Lloyd/Kyra Currence
+
 package com.KCBProject.BankingApplication.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
+
+import com.KCBProject.BankingApplication.entity.User;
 
 @Entity
 @Table(name = "Accounts")
@@ -23,7 +28,11 @@ public class Account {
     private BigDecimal balance;
 
     @Column(name = "DATEOPENED")
-    private Date dateOpened;
+    private LocalDateTime dateOpened;
+
+    @ManyToOne
+    @JoinColumn(name = "USERID", insertable = false, updatable = false)
+    private User user;
 
     //getters and setters
     //AcountId
@@ -55,10 +64,10 @@ public class Account {
         this.balance = balance;
     }
     //DateOpened
-    public Date getDateOpened() {
+    public LocalDateTime getDateOpened() {
         return dateOpened;
     }
-    public void setDateOpened (Date dateOpened) {
+    public void setDateOpened (LocalDateTime dateOpened) {
         this.dateOpened = dateOpened;
     }
 }

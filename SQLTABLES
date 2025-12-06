@@ -1,3 +1,5 @@
+-- Composed by Kyra Currence for table implementation
+
 SQL Table Creation (Directly from team document)
 -- 1. Create the Bank table
 CREATE TABLE Bank (

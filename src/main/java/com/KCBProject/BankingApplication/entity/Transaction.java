@@ -1,3 +1,5 @@
+//Authored by Kyra Currence
+
 package com.KCBProject.BankingApplication.entity;
 
 import jakarta.persistence.*;
@@ -35,7 +37,7 @@ public class Transaction {
 
     //accountid
     public Long getAccountId() {return accountId;}
-    public void setAccountid(Long accountId) {this.accountId = accountId;}
+    public void setAccountId(Long accountId) {this.accountId = accountId;}
 
     //transactiontype
     public String getTransactionType() {return transactionType;}

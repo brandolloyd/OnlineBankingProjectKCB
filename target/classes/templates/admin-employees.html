@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Employees</title>
+</head>
+<body>
+<h1>All Employees</h1>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Username</th>
+        <th>Position</th>
+        <th>Bank</th>
+    </tr>
+
+    <tr th:each="emp : ${employees}">
+        <td th:text="${emp.employeeId}"></td>
+        <td th:text="${emp.firstName + ' ' + emp.lastName}"></td>
+        <td th:text="${emp.username}"></td>
+        <td th:text="${emp.position}"></td>
+        <td th:text="${emp.bank != null ? emp.bank.name : 'Unassigned'}"></td>
+    </tr>
+</table>
+
+<br>
+<a href="/admin/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

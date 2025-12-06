@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee Dashboard</title>
+</head>
+<body>
+
+<h2>Welcome, <span th:text="${employee.firstName}"></span>!</h2>
+
+<hr>
+
+<h3>Employee Options</h3>
+
+<ul>
+    <li><a th:href="@{/employee/customers}">View All Customers</a></li>
+    <li><a th:href="@{/employee/accounts}">View All Accounts</a></li>
+    <li><a th:href="@{/employee/transactions}">View All Transactions</a></li>
+</ul>
+
+<hr>
+
+<a th:href="@{/employee/logout}">Logout</a>
+
+</body>
+</html>

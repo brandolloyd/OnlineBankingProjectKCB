@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.KCBProject.BankingApplication.entity.User;
 import com.KCBProject.BankingApplication.repository.UserRepository;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -54,5 +55,20 @@ public class UserService {
         System.out.println("AUTH RESULT - user present: " + userOptional.isPresent());
 
         return userOptional;
+    }
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    //admin search things
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+    public List<User> findByLastName(String lastName) {
+        return userRepository.findByLastName(lastName);
+    }
+
+    public void save(User user){
+        userRepository.save(user);
     }
 }

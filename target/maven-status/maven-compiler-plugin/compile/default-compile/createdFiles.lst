@@ -1,0 +1,16 @@
+entity/Employee.class
+repository/TransactionRepository.class
+repository/UserRepository.class
+repository/AccountRepository.class
+entity/User.class
+service/TransactionService.class
+entity/Transaction.class
+controller/AdminController.class
+controller/AuthController.class
+controller/LoginRequest.class
+controller/UserController.class
+controller/WebController.class
+entity/Account.class
+service/UserService.class
+com/KCBProject/BankingApplication/BankingApplication.class
+service/AccountService.class

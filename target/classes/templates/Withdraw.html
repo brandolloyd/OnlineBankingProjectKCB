@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Withdraw</title>
+</head>
+<body>
+
+<h2>Withdraw From Account</h2>
+
+<p><strong>Account ID:</strong> <span th:text="${account.accountId}"></span></p>
+<p><strong>Balance:</strong> $<span th:text="${account.balance}"></span></p>
+
+<!-- WITHDRAW FORM -->
+<form th:action="@{|/user/account/${account.accountId}/withdraw|}" method="post">
+
+    <label>Amount:</label>
+    <input type="number" step="0.01" name="amount" required>
+
+    <button type="submit">Withdraw</button>
+</form>
+
+<!-- ERROR MESSAGE -->
+<p th:if="${error}" style="color:red" th:text="${error}"></p>
+
+<a th:href="@{|/user/account/${account.accountId}|}">Back to Account</a>
+
+</body>
+</html>

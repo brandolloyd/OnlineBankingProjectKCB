@@ -27,5 +27,14 @@ public class EmployeeService {
         }
         return Optional.empty();
     }
+    public Optional<Employee> findByUsernameAndPassword(String username, String password) {
+        return employeeRepository.findByUsernameAndPassword(username, password);
+    }
+    public Optional<Employee> findById(Long id) {
+        return employeeRepository.findById(id);
+    }
 
+    public Iterable<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
 }

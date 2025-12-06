@@ -1,5 +1,8 @@
+//Authored by Brandon Lloyd/Kyra Currence
+
 package com.KCBProject.BankingApplication.entity;
 
+import com.KCBProject.BankingApplication.entity.Bank;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -33,6 +36,10 @@ public class Employee {
     @Column(name = "PASSWORD")
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "BANKID")
+    private Bank bank;
+
     //getters and setters
     //employeeid
     public Long getEmployeeId() {return employeeId;}
@@ -65,4 +72,8 @@ public class Employee {
     //password
     public String getPassword() {return password;}
     public void setPassword(String password) {this.password = password;}
+
+    //bank
+    public Bank getBank() {return bank;}
+    public void setBank(Bank bank) {this.bank = bank;}
 }

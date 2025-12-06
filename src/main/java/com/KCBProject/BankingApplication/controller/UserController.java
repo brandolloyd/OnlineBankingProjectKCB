@@ -1,5 +1,8 @@
+//Authored by Christal Cain
+
 package com.KCBProject.BankingApplication.controller;
 
+import com.KCBProject.BankingApplication.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -29,6 +32,9 @@ public class UserController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private TransactionService transactionService;
     /*
     Handles requests to view the user dashboard
     UserId is passed via a request parameter, but in a real system
@@ -115,6 +121,64 @@ public class UserController {
         return "redirect:/user/account/" + accountId;
     }
 
+    // Show withdrawal form
+    @GetMapping("/user/account/{accountId}/withdraw")
+    public String showWithdrawForm(@PathVariable Long accountId,
+                                   HttpSession session,
+                                   Model model) {
+
+        User user = (User) session.getAttribute("currentUser");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        Account account = accountService.findAccountById(accountId);
+        model.addAttribute("account", account);
+
+        return "withdraw";
+    }
+
+    // Process withdrawal
+    @PostMapping("/user/account/{accountId}/withdraw")
+    public String processWithdraw(@PathVariable Long accountId,
+                                  @RequestParam double amount,
+                                  HttpSession session,
+                                  Model model) {
+
+        User user = (User) session.getAttribute("currentUser");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        Account account = accountService.findAccountById(accountId);
+
+        if (amount <= 0) {
+            model.addAttribute("error", "Amount must be greater than 0.");
+            model.addAttribute("account", account);
+            return "withdraw";
+        }
+
+        if (account.getBalance().compareTo(BigDecimal.valueOf(amount)) < 0) {
+            model.addAttribute("error", "Insufficient funds.");
+            model.addAttribute("account", account);
+            return "withdraw";
+        }
+
+        account.setBalance(account.getBalance().subtract(BigDecimal.valueOf(amount)));
+        accountService.save(account);
+
+        //Save withdrawal transaction
+        transactionService.recordTransaction(
+                accountId,
+                BigDecimal.valueOf(amount),
+                "Withdrawal",
+                "WITHDRAWAL"
+        );
+
+        return "redirect:/user/account/" + accountId;
+    }
+
+
     @GetMapping("/api/users/{username}/dashboard")
     public ResponseEntity<?> getUserDashboard(@PathVariable String username) {
         // Look up the user by username
@@ -137,10 +201,5 @@ public class UserController {
         response.put("accounts", accounts);
 
         return ResponseEntity.ok(response);
-    }
-    @GetMapping("/account/{accountId}/deposit")
-    public String showDepositForm(@PathVariable Long accountId, Model model) {
-        model.addAttribute("accountId", accountId);
-        return "account-deposit";
     }
 }

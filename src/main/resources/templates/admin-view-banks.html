@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Banks</title>
+</head>
+<body>
+<h2>Bank Locations</h2>
+
+<table border="1">
+    <tr>
+        <th>Bank ID</th>
+        <th>Name</th>
+        <th>Location</th>
+    </tr>
+
+    <tr th:each="bank : ${banks}">
+        <td th:text="${bank.bankId}"></td>
+        <td th:text="${bank.name}"></td>
+        <td th:text="${bank.location}"></td>
+    </tr>
+</table>
+
+<br>
+<a href="/admin/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

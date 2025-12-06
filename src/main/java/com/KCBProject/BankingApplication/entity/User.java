@@ -1,7 +1,10 @@
+//Authored by Brandon Lloyd
+
 package com.KCBProject.BankingApplication.entity;
 
 import jakarta.persistence.*; //database mapping
 import java.util.Date; //handle date fields
+import java.util.List;
 
 @Entity
 @Table(name = "CUSTOMER")
@@ -29,6 +32,9 @@ public class User {
 
     @Column(name = "DATECREATED")
     private Date dateCreated;
+
+    @OneToMany(mappedBy = "user")
+    private List<Account> accounts;
 
     //Getters and setters, SPRING required
     public Long getUserId() {
@@ -76,5 +82,12 @@ public class User {
     }
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }
